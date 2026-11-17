@@ -51,7 +51,7 @@ const att0 = [14, 7, 0].map((o, s) => ({
 
 let mhs = store(K.m) || mhs0;
 let att = store(K.a) || att0;
-const dosen = store(K.d) || { username: 'dosen', password: 'dosen123', nama: 'Sir Regi Nayoan' };
+const dosen = store(K.d) || { username: 'dosen', password: 'dosen123', nama: 'Dr. Budi Santoso' };
 const save = () => { store(K.m, mhs); store(K.a, att); };
 
 let cur = {};
@@ -155,12 +155,17 @@ function initDash() {
     ['Perlu perhatian', low.length, 'y']
   ].map(([l, v, c]) => `<div class="card stat ${c}"><small>${l}</small><b>${v}</b></div>`).join('');
 
-  $('#warn').innerHTML = low.map(m => `
-    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd)">
-      <span>${esc(m.nama)}<br><small style="color:var(--mut)">${esc(m.nim)}</small></span>
-      <span class="tag">${pct(m)}%</span>
-    </div>
-  `).join('') || '<div class="empty">Semua mahasiswa di atas 75% 🎉</div>';
+  $('#warn').innerHTML = low.length
+    ? low.map(m => `
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd)">
+          <span>${esc(m.nama)}<br><small style="color:var(--mut)">${esc(m.nim)}</small></span>
+          <span class="tag">${pct(m)}%</span>
+        </div>
+      `).join('')
+    : `<div class="empty ok">
+        <b>Aman! Tidak ada mahasiswa di bawah 75%</b><br>
+        <small>Seluruh mahasiswa memenuhi batas minimal kehadiran.</small>
+      </div>`;
 
   if (typeof Chart === 'undefined') return;
   chart?.destroy();
@@ -176,7 +181,7 @@ function initDash() {
           const v = Object.values(a.records);
           return v.length ? Math.round((v.filter(x => x === 'H').length / v.length) * 100) : 0;
         }),
-        backgroundColor: '#408AFF',
+        backgroundColor: '#3b82f6',
         borderRadius: 6
       }]
     },
