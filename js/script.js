@@ -51,7 +51,7 @@ const att0 = [14, 7, 0].map((o, s) => ({
 
 let mhs = store(K.m) || mhs0;
 let att = store(K.a) || att0;
-const dosen = store(K.d) || { username: 'dosen', password: 'dosen123', nama: 'Dr. Budi Santoso' };
+const dosen = store(K.d) || { username: 'dosen', password: 'dosen123', nama: 'Sir. Regi Nayoan' };
 const save = () => { store(K.m, mhs); store(K.a, att); };
 
 let cur = {};
