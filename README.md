@@ -1,26 +1,147 @@
-# SiAbsen — Sistem Absensi Dosen
+# 📋 SiAbsen — Sistem Informasi Absensi Mahasiswa
 
-Aplikasi web interaktif untuk dosen mengelola absensi mahasiswa (HTML, CSS, Vanilla JavaScript).
+## 📝 Deskripsi
 
-## Struktur
+**SiAbsen** adalah aplikasi web interaktif dan responsif berbasis *Vanilla JavaScript* yang dirancang untuk membantu dosen mengelola data mahasiswa, mencatat kehadiran perkuliahan harian, memantau statistik kehadiran melalui grafik visual, serta mengekspor rekapitulasi absensi secara digital.
+
+Aplikasi ini dikembangkan untuk menyelesaikan permasalahan pencatatan absensi manual yang rentan hilang dan memakan waktu saat menghitung persentase kehadiran akhir semester, sekaligus mendeteksi secara otomatis mahasiswa yang memiliki tingkat kehadiran di bawah batas minimum ($75\%$).
+
+## 🛠️ Teknologi yang Digunakan
+
+* **HTML5 (Semantic HTML):** Menggunakan elemen semantik (`<main>`, `<nav>`, `<section>`, `<table>`, `<dialog>`) untuk struktur dokumen yang terorganisir dan ramah aksesibilitas (*ARIA attributes*).
+
+* **CSS:** Tata letak responsif menggunakan **CSS Grid** dan **Flexbox**, variabel tema (`:root`), *media queries* untuk layar *desktop*, *tablet*, dan *mobile*, serta dukungan mode gelap/terang otomatis (`prefers-color-scheme`).
+
+* **JavaScript (Vanilla JS / ES6+):** Pengolahan data menggunakan *Arrays* & *Objects*, *DOM Manipulation*, *Event Handling*, validasi formulir secara langsung, tanpa bergantung pada *framework* eksternal (React/Vue/Angular).
+
+* **Web Storage API:** Menggunakan `localStorage` untuk penyimpanan data mahasiswa dan absensi secara persisten di browser, serta `sessionStorage` untuk manajemen sesi *login*.
+
+* **Chart.js (v4.4.1):** Library visualisasi data (via CDN) untuk menampilkan grafik batang persentase kehadiran per pertemuan pada halaman Dashboard.
+
+## ✨ Fitur
+
+Aplikasi ini dilengkapi dengan berbagai fitur utama dan pendukung untuk pengelolaan absensi:
+
+1. **Autentikasi Dosen (Simulasi Login):** Halaman masuk khusus dosen dengan validasi input kosong dan verifikasi akun demo.
+
+2. **Dashboard & Visualisasi Data:**
+
+   * Menampilkan 4 kartu ringkasan statistik (Total Mahasiswa, Total Pertemuan, Rata-rata Kehadiran, dan Jumlah Mahasiswa Perlu Perhatian).
+
+   * Grafik batang interaktif persentase kehadiran hingga 8 pertemuan terakhir menggunakan **Chart.js**.
+
+   * Daftar peringatan otomatis bagi mahasiswa dengan persentase kehadiran di bawah $75\%$.
+
+3. **Manajemen Data Mahasiswa (CRUD Lengkap):**
+
+   * Menambah, melihat, mengubah, dan menghapus data mahasiswa (`NIM`, `Nama`, `Kelas`).
+
+   * Pencarian *real-time* berdasarkan **Nama** atau **NIM**, serta filter berdasarkan **Kelas** (`TI-1A`, `TI-1B`, `TI-2A`).
+
+   * Validasi formulir ketat (NIM wajib 5–12 digit angka, pencegahan NIM ganda, dan Nama minimal 3 karakter).
+
+4. **Input Absensi Harian:**
+
+   * Pemilihan **Mata Kuliah** dan **Tanggal** pertemuan.
+
+   * Penandaan status kehadiran tiap mahasiswa (**Hadir**, **Izin**, **Sakit**, **Alpa**) dengan tombol segmen interaktif serta tombol pintas **"Hadirkan semua"**.
+
+   * Deteksi otomatis jika absensi pada tanggal dan mata kuliah yang sama sudah ada (data akan diperbarui, bukan digandakan).
+
+5. **Rekapitulasi & Ekspor CSV:**
+
+   * Tabel ringkasan jumlah Hadir, Izin, Sakit, Alpa, beserta *progress bar* persentase kehadiran tiap mahasiswa.
+
+   * Tabel riwayat pertemuan yang dapat diubah atau dihapus kembali.
+
+   * Filter berdasarkan mata kuliah, pencarian mahasiswa, dan fitur **Export CSV** (`rekap-absensi.csv`) sesuai data yang sedang difilter.
+
+6. **Notifikasi & Konfirmasi Interaktif:**
+
+   * Notifikasi *toast* otomatis setiap kali data berhasil disimpan, diperbarui, dihapus, atau diekspor.
+
+   * Modal dialog konfirmasi sebelum menghapus data mahasiswa, menghapus riwayat pertemuan, atau keluar dari aplikasi.
+
+7. **Desain Responsif:** Tampilan menyesuaikan ukuran layar secara otomatis, mengubah menu navigasi samping (*sidebar*) pada *desktop* menjadi bilah navigasi bawah (*bottom bar*) pada perangkat *mobile*.
+
+## 🚀 Cara Menjalankan
+
+### Prasyarat
+
+Sebelum menjalankan aplikasi, pastikan perangkat Anda memenuhi prasyarat berikut:
+
+* **Web Browser Modern:** Google Chrome, Mozilla Firefox, Microsoft Edge, atau Safari versi terbaru dengan fitur **JavaScript** dan **Local Storage** aktif.
+
+* **Koneksi Internet (Opsional):** Diperlukan hanya untuk memuat grafik **Chart.js** dari CDN pada halaman Dashboard (fitur utama lainnya tetap berjalan normal secara *offline*).
+
+* **Code Editor & Local Server (Disarankan):** Visual Studio Code dengan ekstensi **Live Server** untuk pengalaman pengembangan yang optimal.
+
+### Langkah demi Langkah
+
+1. **Unduh atau Clone Repositori**
+   Salin repositori ini ke komputer lokal Anda menggunakan Git, atau unduh file ZIP dan ekstrak isinya:
+
+   ```
+   git clone https://github.com/username-anda/siabsen.git
+   cd siabsen
+   
+   ```
+
+2. **Buka Aplikasi di Browser**
+
+   * **Cara Langsung:** Buka folder `siabsen`, lalu klik dua kali pada file `index.html` untuk membukanya di browser pilihan Anda.
+
+   * **Menggunakan Live Server (Disarankan):** Buka folder `siabsen` di Visual Studio Code, klik kanan pada file `index.html`, lalu pilih **"Open with Live Server"**.
+
+3. **Masuk Menggunakan Akun Demo**
+   Pada halaman Login, masukkan kredensial berikut lalu klik tombol **Masuk**:
+
+   * **Username:** `dosen`
+
+   * **Password:** `dosen123`
+
+4. **Mulai Menggunakan Aplikasi**
+
+   * Lihat statistik keseluruhan di menu **Dashboard**.
+
+   * Kelola daftar mahasiswa di menu **Mahasiswa**.
+
+   * Catat kehadiran kelas di menu **Absensi**.
+
+   * Pantau persentase dan unduh laporan di menu **Rekap**.
+
+5. **Membuka Link Deploy**
+   * Kami sudam menyediakan link deploy untuk web SiAbsen: siabsen-wd.vercel.app
+
+## 📁 Struktur Folder
+
 ```
 siabsen/
-├── index.html       (Login)
-├── dashboard.html   (Dashboard & statistik)
-├── mahasiswa.html   (CRUD mahasiswa)
-├── absensi.html     (Input absensi)
-├── rekap.html       (Rekap & Export CSV)
-├── css/style.css
-└── js/script.js
+├── index.html          # Halaman login dosen
+├── dashboard.html      # Halaman ringkasan statistik & grafik Chart.js
+├── mahasiswa.html      # Halaman manajemen data mahasiswa (CRUD, cari & filter)
+├── absensi.html        # Halaman pencatatan kehadiran harian per mata kuliah
+├── rekap.html          # Halaman rekapitulasi persentase, riwayat & ekspor CSV
+├── css/
+│   └── style.css       # Stylesheet utama (variabel tema, Grid/Flexbox, Dark Mode & responsif)
+├── js/
+│   └── script.js       # Logika aplikasi (CRUD, validasi, LocalStorage, Chart.js & ekspor CSV)
+├── screenshots/        # Folder penyimpanan tangkapan layar aplikasi
+│   ├── IMG-20261117-WA0081.jpg
+│   ├── IMG-20261117-WA0079.jpg
+│   ├── IMG-20261117-WA0080.jpg
+│   ├── IMG-20261117-WA0078.jpg
+│   └── IMG-20261117-WA0082.jpg
+└── README.md           # Dokumentasi proyek
+
 ```
 
-## Cara menjalankan
-Buka `index.html` di browser. Login demo: `dosen` / `dosen123`.
+## 📌 Catatan
 
-## Fitur
-CRUD, search & filter, form validation, Local Storage, responsive, dashboard, notifikasi/konfirmasi, Chart.js, Export CSV.
+* **Simulasi Autentikasi:** Fitur *login* pada proyek ini merupakan simulasi sisi klien (*client-side*) untuk keperluan tugas akhir mata kuliah *Web Design* dan tidak menggunakan autentikasi server maupun basis data eksternal.
 
-## Warna
-Primary `#408AFF`, Secondary `#FBCD40`.
+* **Penyimpanan Lokal:** Seluruh perubahan data mahasiswa dan absensi disimpan secara lokal di browser pengguna menggunakan `localStorage`. Data akan hilang apabila pengguna membersihkan *cache/site data* browser, dan tidak tersinkronisasi antarperangkat.
 
-> Login hanya simulasi (tanpa server) untuk keperluan tugas.
+* **Data Awal (Dummy):** Aplikasi menyediakan 8 data mahasiswa contoh dan 3 riwayat pertemuan awal secara otomatis saat pertama kali dijalankan agar grafik dan rekap langsung dapat diuji.
+
+## 📸 Tangkapan Layar
