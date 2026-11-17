@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Login — SiAbsen</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-page="login">
+  <section class="login" id="login">
+    <div class="card">
+      <h1>Si<span style="color: var(--pri);">Absen</span></h1>
+      <p class="sub">Masuk sebagai dosen untuk mengelola absensi.</p>
+
+      <form id="lf" novalidate>
+        <label>
+          Username
+          <input id="lu" autocomplete="username">
+          <span class="err" id="eu"></span>
+        </label>
+
+        <label>
+          Password
+          <input id="lp" type="password" autocomplete="current-password">
+          <span class="err" id="ep"></span>
+        </label>
+
+        <button type="submit" style="width: 100%;">Masuk</button>
+        <p class="sub" style="margin: 12px 0 0; font-size: 13px;">
+          Demo: <b>dosen</b> / <b>dosen123</b>
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>

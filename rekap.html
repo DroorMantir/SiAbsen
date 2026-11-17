@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rekap Absensi — SiAbsen</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-page="rekap" hidden>
+  <div class="app">
+    <main>
+      <section id="v-rekap">
+        <h1>Rekap Absensi</h1>
+        <p class="sub">Riwayat pertemuan dan persentase kehadiran.</p>
+
+        <div class="bar">
+          <input id="rq" type="search" placeholder="Cari mahasiswa…" aria-label="Cari">
+          <select id="rm" aria-label="Mata kuliah"></select>
+          <button id="csv">⬇ Export CSV</button>
+        </div>
+
+        <div class="card tw">
+          <h2>Per mahasiswa</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>H</th>
+                <th>I</th>
+                <th>S</th>
+                <th>A</th>
+                <th>Kehadiran</th>
+              </tr>
+            </thead>
+            <tbody id="rrows"></tbody>
+          </table>
+        </div>
+
+        <div class="card tw" style="margin-top: 16px;">
+          <h2>Riwayat pertemuan</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Mata kuliah</th>
+                <th>Hadir</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="hrows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>

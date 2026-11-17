@@ -1,0 +1,674 @@
+/* ==========================================================================
+   1. Variables & Theme Setup
+   ========================================================================== */
+:root {
+  --pri: #3b82f6;
+  --pri-d: #2563eb;
+  --pri-soft: rgba(59, 130, 246, 0.1);
+  --sec: #fbbf24;
+  --sec-d: #f59e0b;
+  --sec-tx: #422006;
+
+  --bg: #f4f7fc;
+  --card: #ffffff;
+  --tx: #0f172a;
+  --mut: #64748b;
+  --bd: #e2e8f0;
+  --row-hover: #f8fafc;
+
+  /* Status Colors */
+  --H: #10b981;
+  --I: #f59e0b;
+  --S: #8b5cf6;
+  --A: #ef4444;
+
+  --sh: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  --sh-lg: 0 20px 35px -10px rgba(15, 23, 42, 0.12), 0 8px 15px -6px rgba(15, 23, 42, 0.05);
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ==========================================================================
+   2. Base, Reset & Anti-White-Flash
+   ========================================================================== */
+html {
+  background-color: var(--bg);
+  color: var(--tx);
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--tx);
+  font: 15px/1.6 'Plus Jakarta Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Mencegah layar putih saat perpindahan halaman */
+body[hidden] {
+  display: block !important;
+}
+
+body[hidden] .app {
+  opacity: 0;
+  visibility: hidden;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0 0 4px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+}
+
+.sub {
+  color: var(--mut);
+  font-size: 14px;
+  margin: 0 0 22px;
+}
+
+/* ==========================================================================
+   3. Layout, Navigation & Page Transition
+   ========================================================================== */
+.app {
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  min-height: 100vh;
+  opacity: 1;
+  transition: opacity 0.18s ease-out;
+}
+
+nav {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+  color: #fff;
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 24px rgba(15, 23, 42, 0.06);
+  z-index: 10;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 23px;
+  letter-spacing: -0.03em;
+  margin: 0 10px 4px;
+}
+
+.logo span {
+  color: var(--sec);
+}
+
+.who {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin: 8px 6px 24px;
+}
+
+nav a {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 11px 14px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14.5px;
+  margin-bottom: 6px;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  transform: translateX(2px);
+}
+
+nav a.on {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-left-color: var(--sec);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+nav button.lo {
+  margin-top: auto;
+  background: var(--sec);
+  color: var(--sec-tx);
+  border: 0;
+  border-radius: 12px;
+  padding: 11px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.25);
+  transition: all 0.2s ease;
+}
+
+nav button.lo:hover {
+  background: var(--sec-d);
+  transform: translateY(-1px);
+}
+
+main {
+  padding: 32px 36px;
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  animation: pageFade 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   4. Grid & Cards
+   ========================================================================== */
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.g4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.g2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: var(--sh);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat {
+  position: relative;
+  overflow: hidden;
+  border-top: 4px solid var(--pri);
+}
+
+.stat:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sh-lg);
+}
+
+.stat.y {
+  border-top-color: var(--sec);
+}
+
+.stat small {
+  display: block;
+  color: var(--mut);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.stat b {
+  display: block;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   5. Forms, Inputs & Buttons
+   ========================================================================== */
+.bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+label {
+  font-weight: 600;
+  font-size: 13.5px;
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+input,
+select {
+  font: inherit;
+  font-size: 14px;
+  color: var(--tx);
+  background: var(--bg);
+  border: 1.5px solid var(--bd);
+  border-radius: 11px;
+  padding: 10px 13px;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+input:hover,
+select:hover {
+  border-color: #cbd5e1;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  background: var(--card);
+  border-color: var(--pri);
+  box-shadow: 0 0 0 3.5px var(--pri-soft);
+}
+
+.bar input,
+.bar select {
+  flex: 1 1 160px;
+  width: auto;
+  background: var(--card);
+}
+
+.err {
+  color: var(--A);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.invalid {
+  border-color: var(--A);
+}
+
+button {
+  font: inherit;
+  font-size: 14px;
+  background: var(--pri);
+  color: #fff;
+  border: 0;
+  border-radius: 11px;
+  padding: 10px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.22);
+  transition: all 0.18s ease;
+}
+
+button:hover {
+  background: var(--pri-d);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button.sec {
+  background: var(--sec);
+  color: var(--sec-tx);
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.25);
+}
+
+button.sec:hover {
+  background: var(--sec-d);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.35);
+}
+
+button.ghost {
+  background: var(--card);
+  color: var(--tx);
+  border: 1.5px solid var(--bd);
+  box-shadow: none;
+}
+
+button.ghost:hover {
+  background: var(--row-hover);
+  border-color: var(--mut);
+}
+
+button.dn {
+  background: var(--A);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.22);
+}
+
+button.dn:hover {
+  background: #dc2626;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.sm {
+  padding: 6px 12px;
+  font-size: 12.5px;
+  border-radius: 8px;
+}
+
+/* ==========================================================================
+   6. Tables & Data Display
+   ========================================================================== */
+.tw {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 13px 12px;
+  border-bottom: 1px solid var(--bd);
+}
+
+th {
+  color: var(--mut);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--row-hover);
+}
+
+th:first-child {
+  border-top-left-radius: 8px;
+}
+
+th:last-child {
+  border-top-right-radius: 8px;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+  background: var(--row-hover);
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.acts {
+  display: flex;
+  gap: 8px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--mut);
+  padding: 32px 16px;
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   7. UI Components (Segments, Progress Bar, Tags, Charts)
+   ========================================================================== */
+.seg {
+  display: flex;
+  gap: 6px;
+}
+
+.seg button {
+  background: var(--bg);
+  color: var(--mut);
+  border: 1.5px solid var(--bd);
+  padding: 6px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 9px;
+  box-shadow: none;
+}
+
+.seg button:hover {
+  border-color: var(--mut);
+  color: var(--tx);
+  transform: none;
+}
+
+.seg button.on {
+  color: #fff;
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.seg button.on[data-s="H"] {
+  background: var(--H);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.seg button.on[data-s="I"] {
+  background: var(--sec);
+  color: var(--sec-tx);
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+.seg button.on[data-s="S"] {
+  background: var(--S);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.seg button.on[data-s="A"] {
+  background: var(--A);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.pb {
+  height: 8px;
+  background: var(--bd);
+  border-radius: 99px;
+  overflow: hidden;
+  min-width: 75px;
+}
+
+.pb i {
+  display: block;
+  height: 100%;
+  background: var(--pri);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.pb i.lo {
+  background: var(--A);
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(251, 191, 36, 0.22);
+  color: #92400e;
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  border-radius: 99px;
+  padding: 3px 11px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.chartbox {
+  position: relative;
+  height: 265px;
+}
+
+/* ==========================================================================
+   8. Login, Toast & Modals
+   ========================================================================== */
+.login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(251, 191, 36, 0.22), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(29, 78, 216, 0.4), transparent 45%),
+    linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%);
+}
+
+.login .card {
+  width: 100%;
+  max-width: 400px;
+  padding: 32px 28px;
+  border: 0;
+  border-top: 6px solid var(--sec);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.28);
+  animation: pageFade 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.login h1 {
+  font-size: 28px;
+}
+
+#toast {
+  position: fixed;
+  right: 20px;
+  top: calc(20px + env(safe-area-inset-top, 0px));
+  display: grid;
+  gap: 10px;
+  z-index: 50;
+}
+
+.t {
+  background: var(--tx);
+  color: var(--bg);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--sh-lg);
+  animation: slideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+dialog {
+  border: 1px solid var(--bd);
+  border-radius: 18px;
+  padding: 24px;
+  background: var(--card);
+  color: var(--tx);
+  width: min(92vw, 400px);
+  box-shadow: var(--sh-lg);
+}
+
+dialog::backdrop {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+/* ==========================================================================
+   9. Responsive (Mobile)
+   ========================================================================== */
+@media (max-width: 860px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    z-index: 20;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.12);
+  }
+
+  .logo,
+  .who,
+  nav button.lo {
+    display: none;
+  }
+
+  nav a {
+    flex-direction: column;
+    gap: 2px;
+    font-size: 12px;
+    padding: 8px 12px;
+    margin: 0;
+    border-left: 0;
+    border-top: 3px solid transparent;
+    border-radius: 10px;
+  }
+
+  nav a:hover {
+    transform: none;
+  }
+
+  nav a.on {
+    border-top-color: var(--sec);
+  }
+
+  main {
+    padding: 20px 16px 96px;
+  }
+
+  .g4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .g2 {
+    grid-template-columns: 1fr;
+  }
+}

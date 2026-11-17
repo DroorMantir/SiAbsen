@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Data Mahasiswa — SiAbsen</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-page="mahasiswa" hidden>
+  <div class="app">
+    <main>
+      <section id="v-mahasiswa">
+        <h1>Data Mahasiswa</h1>
+        <p class="sub">Tambah, ubah, dan hapus mahasiswa.</p>
+
+        <div class="bar">
+          <input id="mq" type="search" placeholder="Cari nama / NIM…" aria-label="Cari">
+          <select id="mk" aria-label="Kelas"></select>
+          <button id="madd" class="sec">+ Tambah</button>
+        </div>
+
+        <div class="card tw">
+          <table>
+            <thead>
+              <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="mrows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="dm">
+    <form id="mf" novalidate>
+      <h2 id="mt">Tambah Mahasiswa</h2>
+
+      <label>
+        NIM
+        <input id="mn" inputmode="numeric">
+        <span class="err" id="e1"></span>
+      </label>
+
+      <label>
+        Nama
+        <input id="mnm">
+        <span class="err" id="e2"></span>
+      </label>
+
+      <label>
+        Kelas
+        <select id="mkl"></select>
+      </label>
+
+      <div class="acts" style="justify-content: flex-end;">
+        <button type="button" class="ghost" id="mc">Batal</button>
+        <button type="submit">Simpan</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>

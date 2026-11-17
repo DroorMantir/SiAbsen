@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Input Absensi — SiAbsen</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-page="absensi" hidden>
+  <div class="app">
+    <main>
+      <section id="v-absensi">
+        <h1>Input Absensi</h1>
+        <p class="sub">Pilih mata kuliah dan tanggal, lalu tandai tiap mahasiswa.</p>
+
+        <div class="bar">
+          <select id="am" aria-label="Mata kuliah"></select>
+          <input id="ad" type="date" aria-label="Tanggal">
+          <button class="ghost" id="aall">Hadirkan semua</button>
+        </div>
+
+        <div class="card">
+          <div id="ainfo" class="sub"></div>
+          <div id="arows"></div>
+          <div class="err" id="aerr"></div>
+
+          <div class="acts" style="margin-top: 14px;">
+            <button id="asave">Simpan Absensi</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
