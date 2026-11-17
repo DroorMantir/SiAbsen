@@ -52,6 +52,7 @@ body {
   background: var(--bg);
   color: var(--tx);
   font: 15px/1.6 'Plus Jakarta Sans', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
 }
 
 [hidden] {
@@ -126,9 +127,9 @@ nav {
 .who {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   padding: 8px 12px;
   border-radius: 10px;
   margin: 8px 6px 24px;
@@ -189,6 +190,7 @@ main {
   padding: 32px 36px;
   max-width: 1140px;
   width: 100%;
+  min-width: 0;
   margin: 0 auto;
   animation: pageFade 0.24s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -213,11 +215,11 @@ main {
 }
 
 .g4 {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .g2 {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .card {
@@ -226,6 +228,7 @@ main {
   border-radius: 16px;
   padding: 22px;
   box-shadow: var(--sh);
+  min-width: 0;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -288,6 +291,7 @@ select {
   border-radius: 11px;
   padding: 10px 13px;
   width: 100%;
+  min-width: 0;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
@@ -306,7 +310,7 @@ select:focus {
 
 .bar input,
 .bar select {
-  flex: 1 1 160px;
+  flex: 1 1 180px;
   width: auto;
   background: var(--card);
 }
@@ -393,12 +397,13 @@ button.dn:hover {
    ========================================================================== */
 .tw {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 560px;
+  min-width: 520px;
 }
 
 th,
@@ -440,6 +445,7 @@ tbody tr:last-child td {
 .acts {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .empty {
@@ -455,6 +461,7 @@ tbody tr:last-child td {
 .seg {
   display: flex;
   gap: 6px;
+  flex-wrap: wrap;
 }
 
 .seg button {
@@ -530,11 +537,13 @@ tbody tr:last-child td {
   padding: 3px 11px;
   font-size: 12px;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .chartbox {
   position: relative;
   height: 265px;
+  width: 100%;
 }
 
 /* ==========================================================================
@@ -613,62 +622,175 @@ dialog::backdrop {
 }
 
 /* ==========================================================================
-   9. Responsive (Mobile)
+   9. Responsive (Tablet & Mobile)
    ========================================================================== */
 @media (max-width: 860px) {
   .app {
     grid-template-columns: 1fr;
   }
 
+  /* Ubah sidebar menjadi Top Header (Logo, Nama Dosen, Keluar) + Bottom Nav (4 Menu) */
   nav {
     position: fixed;
-    top: auto;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
     height: auto;
-    z-index: 20;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.12);
+    padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 10px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+    z-index: 30;
   }
 
-  .logo,
-  .who,
-  nav button.lo {
-    display: none;
-  }
-
-  nav a {
-    flex-direction: column;
-    gap: 2px;
-    font-size: 12px;
-    padding: 8px 12px;
+  .logo {
+    display: block;
+    font-size: 19px;
     margin: 0;
+    white-space: nowrap;
+  }
+
+  .who {
+    display: block;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  nav button.lo {
+    display: inline-flex;
+    margin: 0;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  /* Pindahkan 4 link menu menjadi bar navigasi bawah yang rapi */
+  nav a {
+    position: fixed;
+    bottom: 0;
+    width: 25%;
+    height: calc(56px + env(safe-area-inset-bottom, 0px));
+    padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px));
+    margin: 0;
+    background: #1d4ed8;
+    border-radius: 0;
     border-left: 0;
     border-top: 3px solid transparent;
-    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    box-shadow: 0 -2px 12px rgba(15, 23, 42, 0.1);
   }
+
+  nav a:nth-of-type(1) { left: 0%; }
+  nav a:nth-of-type(2) { left: 25%; }
+  nav a:nth-of-type(3) { left: 50%; }
+  nav a:nth-of-type(4) { left: 75%; }
 
   nav a:hover {
     transform: none;
+    background: #1e40af;
   }
 
   nav a.on {
+    background: #1e40af;
     border-top-color: var(--sec);
+    box-shadow: none;
   }
 
+  /* Ruang konten disesuaikan dengan tinggi Top Header & Bottom Nav */
   main {
-    padding: 20px 16px 96px;
+    padding: calc(74px + env(safe-area-inset-top, 0px)) 16px calc(82px + env(safe-area-inset-bottom, 0px));
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .sub {
+    font-size: 13.5px;
+    margin-bottom: 18px;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 14px;
   }
 
   .g4 {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
 
   .g2 {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .stat b {
+    font-size: 24px;
+  }
+
+  /* Bar pencarian & tombol aksi penuh dan fleksibel di mobile */
+  .bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .bar input,
+  .bar select,
+  .bar button {
+    width: 100%;
+    flex: none;
+  }
+
+  /* Tombol status kehadiran (Hadir/Izin/Sakit/Alpa) dibagi rata 4 kolom di layar kecil */
+  .seg {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .seg button {
+    width: 100%;
+    padding: 8px 4px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  #asave {
+    width: 100%;
+  }
+
+  #toast {
+    top: calc(64px + env(safe-area-inset-top, 0px));
+    right: 14px;
+    left: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .g4 {
+    grid-template-columns: 1fr;
+  }
+
+  .logo {
+    font-size: 17px;
+  }
+
+  .who {
+    font-size: 11px;
+    padding: 4px 8px;
   }
 }
