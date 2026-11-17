@@ -529,15 +529,32 @@ tbody tr:last-child td {
 }
 
 .tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
   background: rgba(251, 191, 36, 0.22);
   color: #92400e;
   border: 1px solid rgba(251, 191, 36, 0.45);
   border-radius: 99px;
-  padding: 3px 11px;
+  padding: 4px 12px;
   font-size: 12px;
   font-weight: 700;
+  line-height: 1;
   white-space: nowrap;
+}
+
+/* Merapikan baris daftar peringatan di Dashboard agar badge persentase sejajar di tengah */
+#warn > div {
+  align-items: center;
+  gap: 12px;
+}
+
+#warn .tag {
+  min-width: 52px;
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+  border-color: rgba(239, 68, 68, 0.3);
 }
 
 .chartbox {
