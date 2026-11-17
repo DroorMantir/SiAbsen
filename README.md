@@ -111,7 +111,7 @@ Sebelum menjalankan aplikasi, pastikan perangkat Anda memenuhi prasyarat berikut
    * Pantau persentase dan unduh laporan di menu **Rekap**.
 
 5. **Membuka Link Deploy**
-   * Kami sudam menyediakan link deploy untuk web SiAbsen: siabsen-wd.vercel.app
+   * [Kami sudam menyediakan link deploy untuk web SiAbsen:] (siabsen-wd.vercel.app)
 
 ## 📁 Struktur Folder
 
@@ -145,3 +145,14 @@ siabsen/
 * **Data Awal (Dummy):** Aplikasi menyediakan 8 data mahasiswa contoh dan 3 riwayat pertemuan awal secara otomatis saat pertama kali dijalankan agar grafik dan rekap langsung dapat diuji.
 
 ## 📸 Tangkapan Layar
+* Login
+<img width="1600" height="899" alt="Interface 1" src="https://github.com/user-attachments/assets/69d0f1d9-bda2-46d8-860b-7c04c592b223" />
+* Dashboard
+<img width="1600" height="727" alt="Interface 5" src="https://github.com/user-attachments/assets/4027ff3c-927a-4ec6-b155-6055ad5c83ee" />
+* Data Mahasiswa
+<img width="1600" height="728" alt="Interface 4" src="https://github.com/user-attachments/assets/76b9bf34-b4a7-4ee2-91f4-c8c55ab753bb" />
+* Input Absensi
+<img width="1600" height="729" alt="Interface 3" src="https://github.com/user-attachments/assets/8747aedf-62d6-4f62-b555-60e57bbc8fcb" />
+* Rekap Kehadiran
+<img width="1600" height="899" alt="Interface 2" src="https://github.com/user-attachments/assets/c9b725ef-d27c-44ad-a207-28b1644d0478" />
+
