@@ -155,17 +155,22 @@ function initDash() {
     ['Perlu perhatian', low.length, 'y']
   ].map(([l, v, c]) => `<div class="card stat ${c}"><small>${l}</small><b>${v}</b></div>`).join('');
 
-  $('#warn').innerHTML = low.length
-    ? low.map(m => `
-        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd)">
-          <span>${esc(m.nama)}<br><small style="color:var(--mut)">${esc(m.nim)}</small></span>
-          <span class="tag">${pct(m)}%</span>
-        </div>
-      `).join('')
-    : `<div class="empty ok">
-        <b>Aman! Tidak ada mahasiswa di bawah 75%</b><br>
-        <small>Seluruh mahasiswa memenuhi batas minimal kehadiran.</small>
-      </div>`;
+  $('#warn').innerHTML = !ps.length
+    ? `<div class="empty">
+        <b>Belum ada data kehadiran</b><br>
+        <small>Tambahkan data mahasiswa dan input absensi untuk mulai memantau kehadiran.</small>
+      </div>`
+    : low.length
+      ? low.map(m => `
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd)">
+            <span>${esc(m.nama)}<br><small style="color:var(--mut)">${esc(m.nim)}</small></span>
+            <span class="tag">${pct(m)}%</span>
+          </div>
+        `).join('')
+      : `<div class="empty ok">
+          <b>Aman! Tidak ada mahasiswa di bawah 75%</b><br>
+          <small>Seluruh mahasiswa memenuhi batas minimal kehadiran.</small>
+        </div>`;
 
   if (typeof Chart === 'undefined') return;
   chart?.destroy();
